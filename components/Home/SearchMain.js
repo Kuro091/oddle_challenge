@@ -9,6 +9,7 @@ import { selectLiked } from '../../store/authSlice';
 
 import SearchIcon from '@mui/icons-material/Search';
 import Layout_TwoColumnCardDisplay from '../Layout_TwoColumnCardDisplay';
+import Spinner from '../Spinner';
 
 export default function SearchMain() {
   const search = useSelector(selectSearchState);
@@ -46,7 +47,7 @@ export default function SearchMain() {
 
 
         {/* LOADING */}
-        {searchField != '' && search?.pending && <div style={{ marginTop: '16px' }}>Loading...</div>}
+        {searchField != '' && search?.pending && <Spinner />}
 
         {/* NOT FOUND */}
         {search?.searchResult.items.length === 0 && searchField && (<Box sx={{ position: 'relative', top: '300px' }}>

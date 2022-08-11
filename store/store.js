@@ -13,7 +13,6 @@ import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 import searchSlice from './searchSlice'
 import authSlice from './authSlice'
-import appSlice from './appSlice'
 import { createWrapper } from "next-redux-wrapper";
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -22,7 +21,6 @@ const rootReducer = combineReducers(
   {
     search: searchSlice,
     auth: authSlice,
-    app: appSlice,
   }
 )
 

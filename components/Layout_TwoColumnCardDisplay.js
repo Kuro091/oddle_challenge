@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Layout_TwoColumnCardDisplay({ children }) {
   return (
-    <Grid sx={{ position: 'relative', left: '16px', padding: '10px' }} container spacing={2}>
+    <Grid sx={{ display: 'flex', position: 'relative', left: '6px', padding: '10px', alignContent: 'center', justifyContent: 'center' }} container spacing={2}>
       <Box
         sx={{
           marginTop: '16px',

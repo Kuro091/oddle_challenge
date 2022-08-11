@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { octokit } from '../utils/octokitHelper';
 
 // Initial state
 const initialState = {
@@ -10,7 +11,20 @@ const initialState = {
     items: [],
     total_count: 0,
   },
+  pending: false,
+  error: null
 };
+
+export const getUsersByUsername = createAsyncThunk("auth/getUsersByUsername", async (usernames) => {
+
+  const result = await Promise.all(usernames.map(async (username) => {
+    const oneUser = await octokit.rest.users.getByUsername({ username });
+    return oneUser.data;
+  }));
+
+  console.log('result ', result);
+  return result;
+});
 
 // Actual Slice
 export const authSlice = createSlice({
@@ -27,22 +41,37 @@ export const authSlice = createSlice({
       state.liked = action.payload;
     },
 
-    // Special reducer for hydrating the state. Special case for next-redux-wrapper
-    extraReducers: {
-      // [HYDRATE]: (state, action) => {
-      //   return {
-      //     ...state,
-      //     ...action.payload.auth,
-      //   };
-      // },
+    setAuthSearchResult(state, action) {
+      state.searchResult = action.payload;
     },
 
+    setAuthPending(state, action) {
+      state.pending = action.payload;
+    }
   },
+
+  extraReducers: builder => {
+    builder
+      .addCase(getUsersByUsername.pending, (state, action) => {
+        state.pending = true;
+      })
+      .addCase(getUsersByUsername.fulfilled, (state, action) => {
+        state.pending = false;
+        state.searchResult = {};
+        state.searchResult.items = action.payload;
+        state.searchResult.total_count = action.payload.length;
+      })
+      .addCase(getUsersByUsername.rejected, (state, action) => {
+        state.pending = false;
+        state.error = action.payload;
+      })
+  }
+
 });
 
-export const { setAuthState, setLiked } = authSlice.actions;
+export const { setAuthState, setLiked, setAuthPending, setAuthSearchResult } = authSlice.actions;
 
-export const selectAuthState = (state) => state.auth.authState;
+export const selectAuthPending = (state) => state.auth.pending;
 export const selectLiked = (state) => state.auth.liked;
 
 export default authSlice.reducer;

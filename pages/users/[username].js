@@ -10,6 +10,7 @@ import RepoCard from '../../components/Home/RepoCard';
 import Layout_TwoColumnCardDisplay from '../../components/Layout_TwoColumnCardDisplay';
 import UserCard from '../../components/Home/UserCard';
 import { selectLiked } from '../../store/authSlice';
+import Spinner from '../../components/Spinner';
 
 export default function UserDetail() {
   const router = useRouter()
@@ -17,7 +18,7 @@ export default function UserDetail() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.search.user)
   const pending = useSelector((state) => state.search.pending)
-  console.log('user is ', user);
+  //console.log('user is ', user);
 
   const [value, setValue] = useState(0);
   const likedUsers = useSelector(selectLiked);
@@ -33,7 +34,7 @@ export default function UserDetail() {
     <Layout>
       <Box sx={{ paddingBottom: '72px' }}>
 
-        {pending && (<> <Typography> Loading...</Typography> </>)}
+        {pending && (<> <Spinner /></>)}
 
         {!pending &&
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 10px 10px', backgroundColor: 'white', height: 'fit-content' }}>

@@ -1,6 +1,5 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { octokit } from '../utils/octokitHelper';
 
 // Initial state
@@ -78,7 +77,6 @@ export const getUserByUsername = createAsyncThunk('search/getUserByUsername', as
       const repositories = await octokit.rest.repos.listForUser({ username, per_page: 100 });
       result = { ...response, followersList: followers.data, followingList: following.data, repositoriesList: repositories.data };
 
-      console.log('repos', repositories.data);
       return result
     case 401:
       return { error: { message: "Unauthorized" } };
@@ -107,13 +105,12 @@ export const searchSlice = createSlice({
   // Special reducer for hydrating the state. Special case for next-redux-wrapper
   extraReducers: builder => {
     builder
-      .addCase(HYDRATE, (state, action) => {
-        console.log('HYDRATE :', action.payload);
-        return {
-          ...state,
-          ...action.payload.search,
-        };
-      })
+      // .addCase(HYDRATE, (state, action) => {
+      //   return {
+      //     ...state,
+      //     ...action.payload.search,
+      //   };
+      // })
       .addCase(getUsersByQuery.pending, (state, action) => {
 
         state.pending = true;

@@ -24,6 +24,7 @@ export default function RepoCard({ repo }) {
               width: '200px',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              height: '20px'
             }}><b>{repo.name}</b></div>
             <div style={{ fontSize: '12px', marginTop: '10px' }}>
               <div>

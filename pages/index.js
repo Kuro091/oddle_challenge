@@ -4,7 +4,6 @@ import { wrapper } from '../store/store';
 import { octokit } from '../utils/octokitHelper';
 import SearchMain from '../components/Home/SearchMain';
 import Layout from '../components/layout';
-import { setCurrentTab } from '../store/appSlice';
 import { useEffect } from 'react';
 
 export default function Home() {
