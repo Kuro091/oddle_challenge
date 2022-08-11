@@ -3,18 +3,17 @@ import { HYDRATE } from "next-redux-wrapper";
 
 // Initial state
 const initialState = {
-  authState: false,
+  currentTab: "search"
 };
 
 // Actual Slice
-export const authSlice = createSlice({
-  name: "auth",
+export const appSlice = createSlice({
+  name: "app",
   initialState,
   reducers: {
 
-    // Action to set the authentication status
-    setAuthState(state, action) {
-      state.authState = action.payload;
+    setCurrentTab(state, action) {
+      state.currentTab = action.payload;
     },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -30,8 +29,8 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuthState } = authSlice.actions;
+export const { setCurrentTab } = appSlice.actions;
 
-export const selectAuthState = (state) => state.auth.authState;
+export const selectCurrentTab = (state) => state.app.currentTab;
 
-export default authSlice.reducer;
+export default appSlice.reducer;
