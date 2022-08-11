@@ -22,7 +22,8 @@ export default function SearchFooter() {
       width: '466px',
       height: '72px',
       background: '#FFFFFF',
-      boxShadow: '0px -4px 4px rgba(0, 0, 0, 0.05)'
+      boxShadow: '0px -4px 4px rgba(0, 0, 0, 0.05)',
+      zIndex: '99'
     }}>
       <BottomNavigation
         showLabels

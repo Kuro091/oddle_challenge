@@ -17,9 +17,7 @@ export default function UserCard({ user, likedUsers, searchField }) {
       dispatch(setLiked(likedUsers.filter((login) => login !== user.login)));
       return;
     }
-
     dispatch(setLiked([...likedUsers, user.login]));
-
   }
 
   const handleRouteToDetails = (e, username) => {
@@ -43,7 +41,7 @@ export default function UserCard({ user, likedUsers, searchField }) {
           </div>
         </Grid>
         <Grid item xs={8} style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '0px', right: '1px', zIndex: '99' }} onClick={(e) => handleLike(e)}>{isLiked ? <FavoriteOutlinedIcon sx={{ color: '#F44336' }} /> : <FavoriteBorderOutlinedIcon sx={{ color: '#F44336' }} />}</div>
+          <div style={{ position: 'absolute', top: '0px', right: '1px', zIndex: '1' }} onClick={(e) => handleLike(e)}>{isLiked ? <FavoriteOutlinedIcon sx={{ color: '#F44336' }} /> : <FavoriteBorderOutlinedIcon sx={{ color: '#F44336' }} />}</div>
           <div style={{ marginLeft: '6px', position: 'relative', float: 'left', marginTop: '3px', textAlign: 'left', }}>
             <div style={{
               fontSize: '16px',
@@ -53,10 +51,10 @@ export default function UserCard({ user, likedUsers, searchField }) {
             }}><b>{searchField}</b>{user.login.split(searchField)}</div>
             <div style={{ fontSize: '12px', marginTop: '10px' }}>
               <div>
-                {user.followers} followers
+                {user.followers && (<>{user.followers} followers</>)}
               </div>
               <div>
-                {user.following} following
+                {user.following && (<>{user.followers} following</>)}
               </div>
             </div>
           </div>

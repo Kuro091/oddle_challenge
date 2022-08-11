@@ -16,10 +16,11 @@ const initialState = {
   statusCode: 0,
   currentPage: 0,
   maxPage: 0,
+  user: {}
 };
 
 export const getUsersByQuery = createAsyncThunk('search/getUsersByQuery', async ({ searchQuery, per_page, page }) => {
-  console.log('search with', searchQuery, per_page, page);
+  //console.log('search with', searchQuery, per_page, page);
   const response = await octokit.rest.search.users({ q: `${searchQuery} in:login`, per_page, page });
   switch (response?.status) {
     case 200:
@@ -71,8 +72,14 @@ export const getUserByUsername = createAsyncThunk('search/getUserByUsername', as
 
   switch (response?.status) {
     case 200:
-      console.log('response.data :', response);
-      return response.data
+      let result = {};
+      const followers = await octokit.rest.users.listFollowersForUser({ username, per_page: 100 });
+      const following = await octokit.rest.users.listFollowingForUser({ username, per_page: 100 });
+      const repositories = await octokit.rest.repos.listForUser({ username, per_page: 100 });
+      result = { ...response, followersList: followers.data, followingList: following.data, repositoriesList: repositories.data };
+
+      console.log('repos', repositories.data);
+      return result
     case 401:
       return { error: { message: "Unauthorized" } };
     case 404:
@@ -139,6 +146,9 @@ export const searchSlice = createSlice({
         }
 
         state.user = action.payload.data;
+        state.user.followersList = action.payload.followersList;
+        state.user.followingList = action.payload.followingList;
+        state.user.repositoriesList = action.payload.repositoriesList;
         state.statusCode = action.payload.status;
       })
       .addCase(getUserByUsername.rejected, (state, action) => {

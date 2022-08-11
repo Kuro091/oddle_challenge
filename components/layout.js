@@ -16,7 +16,7 @@ export default function Layout({ children, home }) {
         justifyContent: 'center',
       }}>
         <div className={styles.container}>
-          <SearchHeader home />
+          <SearchHeader />
           {children}
           <SearchFooter />
         </div>

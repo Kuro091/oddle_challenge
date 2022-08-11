@@ -8,6 +8,7 @@ import { wrapper } from '../../store/store';
 import { selectLiked } from '../../store/authSlice';
 
 import SearchIcon from '@mui/icons-material/Search';
+import Layout_TwoColumnCardDisplay from '../Layout_TwoColumnCardDisplay';
 
 export default function SearchMain() {
   const search = useSelector(selectSearchState);
@@ -34,7 +35,7 @@ export default function SearchMain() {
   }
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center', height: 'fit-content', backgroundColor: 'white' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center', paddingBottom: '72px', height: 'fit-content', backgroundColor: 'white' }}>
       <div>
         <TextField value={searchField}
           onChange={handleChange}
@@ -72,26 +73,23 @@ export default function SearchMain() {
             lineHeight: '20px'
           }}>
             {search.searchResult.total_count} Github users found
+
           </div>
-          <Grid sx={{ position: 'relative', left: '16px' }} container spacing={2}>
-            <Box
-              sx={{
-                p: 2,
-                display: 'grid',
-                gridTemplateColumns: { md: '1fr 1fr' },
-                gap: 2,
-              }}
-            >
+          <div style={{ marginLeft: '6px' }}>
+            <Layout_TwoColumnCardDisplay>
               {search.searchResult.items.map((user) => (
                 <UserCard key={user.id} user={user} searchField={searchField} likedUsers={likedUsers} />
               ))}
-            </Box>
-          </Grid>
+            </Layout_TwoColumnCardDisplay>
 
-          <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
-            <Pagination defaultPage={search.currentPage - 1} count={search.maxPage} onChange={(e) => handleSwitchPage(e)} />
 
-          </Box>
+            {search.currentPage > 0 && <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
+              <Pagination defaultPage={search.currentPage - 1} count={search.maxPage} onChange={(e) => handleSwitchPage(e)} />
+
+            </Box>}
+          </div>
+
+
         </>}
 
 
