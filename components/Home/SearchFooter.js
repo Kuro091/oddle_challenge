@@ -1,11 +1,20 @@
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export default function SearchFooter() {
-  const [value, setValue] = useState(0);
+  const router = useRouter();
+  const mapper = useMemo(() => {
+    return [
+      { value: 0, label: 'Users', route: '/' },
+      { value: 1, label: 'Liked', route: '/users/liked' },
+    ];
+  }, []);
 
+  const [value, setValue] = useState(mapper.find(m => m.route == router.pathname)?.value || 0);
   return (
     <Box sx={{
       position: 'fixed',
@@ -20,6 +29,7 @@ export default function SearchFooter() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+          router.push(mapper[newValue].route);
         }}
         sx={{
           display: 'flex',

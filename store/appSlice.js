@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 
 // Initial state
 const initialState = {
-  currentTab: "search"
+  currentTab: 0
 };
 
 // Actual Slice
@@ -18,12 +18,12 @@ export const appSlice = createSlice({
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     extraReducers: {
-      [HYDRATE]: (state, action) => {
-        return {
-          ...state,
-          ...action.payload.auth,
-        };
-      },
+      // [HYDRATE]: (state, action) => {
+      //   return {
+      //     ...state,
+      //     ...action.payload.auth,
+      //   };
+      // },
     },
 
   },
