@@ -3,14 +3,15 @@ import Image from 'next/image';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuthPending, setAuthSearchResult, setLiked } from '../../store/authSlice';
+import { wrapper } from '../../store/store';
 
-export default function UserCard({ user, likedUsers, searchField }) {
+export default function UserCard({ user, likedUsers }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const isLiked = likedUsers?.includes(user.login);
-
+  const searchField = useSelector((state) => state.search.searchQuery);
   const handleLike = (e) => {
     e.stopPropagation();
     dispatch(setAuthPending(true))
@@ -25,7 +26,6 @@ export default function UserCard({ user, likedUsers, searchField }) {
     e.stopPropagation();
     router.push(`/users/${username}`);
   }
-
 
   return (
     <Paper sx={{

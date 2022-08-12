@@ -49,13 +49,20 @@ const makeStore = ({ isServer }) => {
     //If it's on client side, create a store which will persist
     const { persistStore, persistReducer } = require('redux-persist');
 
-    const persistConfig = {
-      key: 'root',
-      whitelist: ['search', 'auth'],
-      storage, // if needed, use a safer storage
-    };
+    const authPersistedReducer = persistReducer(
+      { key: 'auth', storage, blacklist: 'pending' },
+      authSlice
+    );
 
-    const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
+    const searchPersistedReducer = persistReducer(
+      { key: 'search', storage, blacklist: 'pending' },
+      searchSlice
+    );
+
+    const persistedReducer = combineReducers({
+      auth: authPersistedReducer,
+      search: searchPersistedReducer,
+    });
 
     const store = createStore(
       persistedReducer,

@@ -22,7 +22,6 @@ export const getUsersByUsername = createAsyncThunk("auth/getUsersByUsername", as
     return oneUser.data;
   }));
 
-  console.log('result ', result);
   return result;
 });
 

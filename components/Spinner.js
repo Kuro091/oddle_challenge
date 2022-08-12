@@ -17,14 +17,19 @@ export default function Spinner() {
         cursor: 'wait',
         position: 'fixed',
       }}>
-        Please wait a moment...
         <ClipLoader loading={true} color={'darkgrey'} cssOverride={{
-
           position: 'absolute',
           top: '42%',
           left: '46%',
 
         }} size={150} />
+        <div style={{
+          position: 'absolute',
+          top: '48%',
+          left: '46%',
+          color: 'white'
+        }}>Please wait a moment...</div>
+
       </div>
     </>
 
