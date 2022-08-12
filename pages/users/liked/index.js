@@ -12,7 +12,6 @@ export default function Liked() {
   const likedUsersArr = useSelector((state) => state.auth.liked);
   const likedUsers = useSelector((state) => state.auth.searchResult?.items);
   const authPending = useSelector((state) => state.auth.pending);
-  console.log('likedUsers ', likedUsersArr);
   const dispatch = useDispatch();
   useEffect(() => {
     if (likedUsersArr) {
