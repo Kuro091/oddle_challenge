@@ -20,7 +20,7 @@ export default function Liked() {
   }, [dispatch, likedUsersArr])
   return (
     <Layout>
-      <div style={{ height: '100%', paddingBottom: '200px' }}>
+      <div style={{ paddingBottom: '200px' }}>
         {authPending && (<Spinner />)}
         {likedUsers && likedUsers.length > 0 &&
           <Layout_TwoColumnCardDisplay>
