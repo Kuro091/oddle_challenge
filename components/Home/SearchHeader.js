@@ -42,7 +42,7 @@ export default function SearchHeader({ home }) {
         color: theme.palette.text.primary
       }}>Search</Typography>}
 
-      {router.pathname != '/' && <HomeIcon onClick={() => { router.push('/') }} sx={{ width: '36px', height: '36px', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer' }} />}
+      {router.pathname != '/' && <HomeIcon onClick={() => { router.push('/') }} sx={{ width: '36px', height: '36px', color: theme.palette.text.primary, cursor: 'pointer' }} />}
       <Switch checked={toggleDark} onChange={handleChange} />
 
     </Box>
