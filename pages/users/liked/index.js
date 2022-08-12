@@ -30,7 +30,7 @@ export default function Liked() {
           </Layout_TwoColumnCardDisplay>
         }
         {likedUsers && likedUsers.length === 0 &&
-          <div style={{ display: 'flex', position: 'relative', top: '35%', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', position: 'relative', marginTop: '300px', justifyContent: 'center', alignContent: 'center' }}>
             <div style={{ textAlign: 'center' }}>
               <GroupIcon />
               <Typography sx={{
