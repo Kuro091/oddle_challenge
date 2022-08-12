@@ -18,6 +18,7 @@ export default function Layout({ children, home }) {
         width: '466px',
         height: '100%',
         color: 'black',
+        minHeight: '100vh',
         backgroundColor: theme.palette.custom.innerBackground,
       }}>
         <SearchHeader />

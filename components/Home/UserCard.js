@@ -57,9 +57,11 @@ export default function UserCard({ user, likedUsers }) {
             <div style={{ fontSize: '12px', marginTop: '10px' }}>
               <div>
                 {user.followers && (<>{user.followers} followers</>)}
+                {!user.followers && (<>0 followers</>)}
               </div>
               <div>
                 {user.following && (<>{user.followers} following</>)}
+                {!user.following && (<> following</>)}
               </div>
             </div>
           </div>
