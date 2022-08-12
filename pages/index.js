@@ -43,7 +43,7 @@ export default function Home() {
       <Box sx={{
         display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center'
       }}>
-        <div>
+        <div style={{ height: '100%', paddingBottom: '200px' }}>
           <TextField value={searchField}
             onChange={handleChange}
             sx={{

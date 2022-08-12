@@ -16,11 +16,12 @@ export default function Layout({ children, home }) {
     }}>
       <div style={{
         width: '466px',
+        height: '100%',
         color: 'black',
         backgroundColor: theme.palette.custom.innerBackground,
       }}>
         <SearchHeader />
-        <div style={{ paddingBottom: '200px' }}>{children}</div>
+        {children}
 
         <SearchFooter />
       </div>

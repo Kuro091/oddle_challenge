@@ -20,33 +20,32 @@ export default function Liked() {
   }, [dispatch, likedUsersArr])
   return (
     <Layout>
-      {authPending && (<Spinner />)}
-      {likedUsers && likedUsers.length > 0 &&
-        <Layout_TwoColumnCardDisplay>
-          {likedUsers.map((user) => (
-            <UserCard key={user.login} user={user} likedUsers={likedUsersArr} />
-          ))}
-        </Layout_TwoColumnCardDisplay>
-      }
-      {likedUsers && likedUsers.length === 0 &&
-        <div style={{ display: 'flex', position: 'relative', top: '35%', justifyContent: 'center' }}>
-          <div style={{ textAlign: 'center' }}>
-            <GroupIcon />
-            <Typography sx={{
-              fontFamily: 'Jost',
-              fontSize: '14px',
-              flexBasis: '100%'
-            }}>
-              {`Once you like people, you'll see them here.`}
-            </Typography>
+      <div style={{ height: '100%', paddingBottom: '200px' }}>
+        {authPending && (<Spinner />)}
+        {likedUsers && likedUsers.length > 0 &&
+          <Layout_TwoColumnCardDisplay>
+            {likedUsers.map((user) => (
+              <UserCard key={user.login} user={user} likedUsers={likedUsersArr} />
+            ))}
+          </Layout_TwoColumnCardDisplay>
+        }
+        {likedUsers && likedUsers.length === 0 &&
+          <div style={{ display: 'flex', position: 'relative', top: '35%', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <GroupIcon />
+              <Typography sx={{
+                fontFamily: 'Jost',
+                fontSize: '14px',
+                flexBasis: '100%'
+              }}>
+                {`Once you like people, you'll see them here.`}
+              </Typography>
 
+            </div>
           </div>
+        }
 
-
-
-
-        </div>
-      }
+      </div>
     </Layout>
   )
 }
