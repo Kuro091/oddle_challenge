@@ -12,7 +12,6 @@ export default function Layout({ children, home }) {
       display: 'flex',
       justifyContent: 'center',
       alignContent: 'center',
-      height: '100%',
       backgroundColor: theme.palette.background.default,
     }}>
       <div style={{
