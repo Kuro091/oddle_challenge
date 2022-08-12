@@ -32,63 +32,59 @@ export default function UserDetail() {
   }, [username, dispatch]);
   return (
     <Layout>
-      <Box sx={{ paddingBottom: '72px' }}>
-
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 10px 10px', minHeight: '100vh', paddingBottom: '200px' }}>
         {pending && (<> <Spinner /></>)}
 
         {!pending &&
-          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '20px 10px 10px', backgroundColor: 'white', height: 'fit-content' }}>
-            {user && (
-              <>
-                <Image style={{ flexGrow: 0, borderRadius: '160px' }} src={user.avatar_url} width={200} height={200} alt='avatar' />
-                <div style={{ textAlign: 'center', width: '200px', marginTop: '10px' }}>
-                  <div style={{ fontFamily: 'Arsenal', fontSize: '26px', marginBottom: '3px' }}>{user.name}</div>
-                  <div style={{ fontFamily: 'Jost', fontSize: '22px' }}>{user.login}</div>
-                  <div style={{ fontFamily: 'Jost', display: 'inline-flex', alignContent: 'center' }}><LocationCityIcon sx={{ width: '16px', height: '16px', color: 'rgba(0, 0, 0, 0.54)' }} />{user.location}</div>
-                </div>
-                {/* TABs */}
-                <Box sx={{ width: '100%', marginTop: '10px' }}>
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                      <Tab sx={{ flexGrow: 1 }} label={`Repository (${user.public_repos})`} />
-                      <Tab sx={{ flexGrow: 1 }} label={`Followers (${user.followers})`} />
-                      <Tab sx={{ flexGrow: 1 }} label={`Following (${user.following})`} />
-                    </Tabs>
-                  </Box>
-                  <TabPanel value={value} index={0}>
-                    <Layout_TwoColumnCardDisplay>
-                      {user?.repositoriesList?.map((repo) => (
-                        <RepoCard repo={repo} key={repo.name} />
-                      ))}
-                    </Layout_TwoColumnCardDisplay>
-
-
-                  </TabPanel>
-                  <TabPanel value={value} index={1}>
-                    <Layout_TwoColumnCardDisplay>
-                      {user?.followersList?.map((follower) => (
-                        <UserCard user={follower} key={follower.login} likedUsers={likedUsers} />
-                      ))}
-                    </Layout_TwoColumnCardDisplay>
-                  </TabPanel>
-                  <TabPanel value={value} index={2}>
-                    <Layout_TwoColumnCardDisplay>
-                      {user?.followingList?.map((following) => (
-                        <UserCard user={following} key={following.login} likedUsers={likedUsers} />
-                      ))}
-                    </Layout_TwoColumnCardDisplay>
-
-                  </TabPanel>
+          user && (
+            <>
+              <Image style={{ flexGrow: 0, borderRadius: '160px' }} src={user.avatar_url} width={200} height={200} alt='avatar' />
+              <div style={{ textAlign: 'center', width: '200px', marginTop: '10px' }}>
+                <div style={{ fontFamily: 'Arsenal', fontSize: '26px', marginBottom: '3px' }}>{user.name}</div>
+                <div style={{ fontFamily: 'Jost', fontSize: '22px' }}>{user.login}</div>
+                <div style={{ fontFamily: 'Jost', display: 'inline-flex', alignContent: 'center' }}><LocationCityIcon sx={{ width: '16px', height: '16px', color: 'rgba(0, 0, 0, 0.54)' }} />{user.location}</div>
+              </div>
+              {/* TABs */}
+              <Box sx={{ width: '100%', marginTop: '10px' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab sx={{ flexGrow: 1 }} label={`Repository (${user.public_repos})`} />
+                    <Tab sx={{ flexGrow: 1 }} label={`Followers (${user.followers})`} />
+                    <Tab sx={{ flexGrow: 1 }} label={`Following (${user.following})`} />
+                  </Tabs>
                 </Box>
+                <TabPanel value={value} index={0}>
+                  <Layout_TwoColumnCardDisplay>
+                    {user?.repositoriesList?.map((repo) => (
+                      <RepoCard repo={repo} key={repo.name} />
+                    ))}
+                  </Layout_TwoColumnCardDisplay>
 
-              </>
 
-            )}
-          </Box>
-        }
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <Layout_TwoColumnCardDisplay>
+                    {user?.followersList?.map((follower) => (
+                      <UserCard user={follower} key={follower.login} likedUsers={likedUsers} />
+                    ))}
+                  </Layout_TwoColumnCardDisplay>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <Layout_TwoColumnCardDisplay>
+                    {user?.followingList?.map((following) => (
+                      <UserCard user={following} key={following.login} likedUsers={likedUsers} />
+                    ))}
+                  </Layout_TwoColumnCardDisplay>
+
+                </TabPanel>
+              </Box>
+
+            </>
+
+          )}
       </Box>
 
-    </Layout>
+    </Layout >
   )
 }
 

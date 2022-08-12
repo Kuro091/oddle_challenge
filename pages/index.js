@@ -43,14 +43,13 @@ export default function Home() {
       <Box sx={{
         display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center'
       }}>
-        <div style={{ height: '100%', paddingBottom: '200px' }}>
+        <div style={{ height: '100vh', paddingBottom: '200px' }}>
           <TextField value={searchField}
             onChange={handleChange}
             sx={{
               width: '434px',
               height: '56px',
             }} id="search" placeholder="Enter GitHub username, i.e. gaearon" variant="outlined" />
-
 
           {/* LOADING */}
           {searchField != '' && search?.pending && <Spinner />}
