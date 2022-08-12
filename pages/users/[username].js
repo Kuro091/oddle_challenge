@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Layout from '../../components/layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserByUsername } from '../../store/searchSlice';
-import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Grid, Tab, Tabs, Typography, useTheme } from '@mui/material';
 import Image from 'next/image';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import RepoCard from '../../components/Home/RepoCard';
@@ -22,7 +22,7 @@ export default function UserDetail() {
 
   const [value, setValue] = useState(0);
   const likedUsers = useSelector(selectLiked);
-
+  const theme = useTheme();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -39,7 +39,7 @@ export default function UserDetail() {
           user && (
             <>
               <Image style={{ flexGrow: 0, borderRadius: '160px' }} src={user.avatar_url} width={200} height={200} alt='avatar' />
-              <div style={{ textAlign: 'center', width: '200px', marginTop: '10px' }}>
+              <div style={{ textAlign: 'center', width: '200px', marginTop: '10px', color: theme.palette.text.primary }}>
                 <div style={{ fontFamily: 'Arsenal', fontSize: '26px', marginBottom: '3px' }}>{user.name}</div>
                 <div style={{ fontFamily: 'Jost', fontSize: '22px' }}>{user.login}</div>
                 <div style={{ fontFamily: 'Jost', display: 'inline-flex', alignContent: 'center' }}><LocationCityIcon sx={{ width: '16px', height: '16px', color: 'rgba(0, 0, 0, 0.54)' }} />{user.location}</div>
