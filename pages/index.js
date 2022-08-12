@@ -4,7 +4,7 @@ import { wrapper } from '../store/store';
 import { octokit } from '../utils/octokitHelper';
 import Layout from '../components/layout';
 import { useCallback, useEffect, useState } from 'react';
-import { Box, Grid, Pagination, Paper, TextField, Typography } from '@mui/material';
+import { Box, Grid, Pagination, Paper, TextField, Typography, useTheme } from '@mui/material';
 import _debounce from 'lodash/debounce';
 import SearchIcon from '@mui/icons-material/Search';
 import Layout_TwoColumnCardDisplay from '../components/Layout_TwoColumnCardDisplay';
@@ -36,9 +36,13 @@ export default function Home() {
     dispatch(getUsersByQuery({ searchQuery: searchField, per_page: 12, page }));
   }
 
+  const theme = useTheme();
+
   return (
     <Layout home>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center', paddingBottom: '72px', height: 'fit-content', backgroundColor: 'white' }}>
+      <Box sx={{
+        display: 'flex', justifyContent: 'center', alignContent: 'center', flexDirection: 'column', textAlign: 'center'
+      }}>
         <div>
           <TextField value={searchField}
             onChange={handleChange}
@@ -73,7 +77,8 @@ export default function Home() {
               position: 'relative',
               display: 'flex',
               fontSize: '14px',
-              lineHeight: '20px'
+              lineHeight: '20px',
+              color: theme.palette.text.primary,
             }}>
               {search.searchResult.total_count} Github users found
 
@@ -86,7 +91,7 @@ export default function Home() {
               </Layout_TwoColumnCardDisplay>
 
 
-              {search.currentPage > 0 && <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
+              {search.currentPage > 0 && <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'center', marginTop: '20px' }}>
                 <Pagination defaultPage={search.currentPage - 1} count={search.maxPage} onChange={(e) => handleSwitchPage(e)} />
 
               </Box>}
@@ -137,7 +142,7 @@ export default function Home() {
         </div>
 
       </Box >
-    </Layout>
+    </Layout >
   );
 }
 

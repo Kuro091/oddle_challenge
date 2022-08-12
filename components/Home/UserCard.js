@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, useTheme } from '@mui/material';
 import Image from 'next/image';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
@@ -27,6 +27,8 @@ export default function UserCard({ user, likedUsers }) {
     router.push(`/users/${username}`);
   }
 
+  const theme = useTheme();
+
   return (
     <Paper sx={{
       width: '209px',
@@ -34,6 +36,7 @@ export default function UserCard({ user, likedUsers }) {
       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)',
       padding: '2px',
       cursor: 'pointer',
+      backgroundColor: theme.palette.custom.innerCardBackground
     }} variant="outlined" key={user.id} onClick={(e) => handleRouteToDetails(e, user.login)}>
       <Grid container>
         <Grid item xs={4}>
@@ -42,7 +45,7 @@ export default function UserCard({ user, likedUsers }) {
           </div>
         </Grid>
         <Grid item xs={8} style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '0px', right: '1px', zIndex: '1' }} onClick={(e) => handleLike(e)}>{isLiked ? <FavoriteOutlinedIcon sx={{ color: '#F44336' }} /> : <FavoriteBorderOutlinedIcon sx={{ color: '#F44336' }} />}</div>
+          <div style={{ position: 'absolute', top: '0px', right: '1px', zIndex: '1' }} onClick={(e) => handleLike(e)}>{isLiked ? <FavoriteOutlinedIcon sx={{ color: theme.palette.custom.heartIcon }} /> : <FavoriteBorderOutlinedIcon sx={{ color: theme.palette.custom.heartIcon }} />}</div>
           <div style={{ marginLeft: '6px', position: 'relative', float: 'left', marginTop: '3px', textAlign: 'left', }}>
             <div style={{
               fontSize: '16px',

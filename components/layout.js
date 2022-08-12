@@ -1,22 +1,28 @@
-import { Box } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
 import React from 'react'
 import SearchFooter from './Home/SearchFooter'
 import SearchHeader from './Home/SearchHeader'
-import styles from "../styles/Home.module.css";
 import { useEffect } from 'react';
 
-
 export default function Layout({ children, home }) {
+  const theme = useTheme();
 
   return (
     <Box sx={{
       display: 'flex',
       justifyContent: 'center',
       alignContent: 'center',
+      height: '100%',
+      backgroundColor: theme.palette.background.default,
     }}>
-      <div className={styles.container}>
+      <div style={{
+        width: '466px',
+        color: 'black',
+        backgroundColor: theme.palette.custom.innerBackground,
+      }}>
         <SearchHeader />
-        {children}
+        <div style={{ paddingBottom: '200px' }}>{children}</div>
+
         <SearchFooter />
       </div>
     </Box>

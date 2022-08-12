@@ -12,7 +12,8 @@ const initialState = {
     total_count: 0,
   },
   pending: false,
-  error: null
+  error: null,
+  currentTheme: 'light',
 };
 
 export const getUsersByUsername = createAsyncThunk("auth/getUsersByUsername", async (usernames) => {
@@ -40,13 +41,19 @@ export const authSlice = createSlice({
       state.liked = action.payload;
     },
 
+    setCurrentTheme(state, action) {
+      state.currentTheme = action.payload;
+    },
+
     setAuthSearchResult(state, action) {
       state.searchResult = action.payload;
     },
 
     setAuthPending(state, action) {
       state.pending = action.payload;
-    }
+    },
+
+
   },
 
   extraReducers: builder => {
@@ -68,7 +75,7 @@ export const authSlice = createSlice({
 
 });
 
-export const { setAuthState, setLiked, setAuthPending, setAuthSearchResult } = authSlice.actions;
+export const { setCurrentTheme, setLiked, setAuthPending, setAuthSearchResult } = authSlice.actions;
 
 export const selectAuthPending = (state) => state.auth.pending;
 export const selectLiked = (state) => state.auth.liked;
