@@ -85,7 +85,7 @@ export default function Home() {
             <div style={{ marginLeft: '6px' }}>
               <Layout_TwoColumnCardDisplay>
                 {search.searchResult.items.map((user) => (
-                  <UserCard key={user.id} user={user} likedUsers={likedUsers} />
+                  <UserCard key={user.id} user={user} likedUsers={likedUsers} highlightSearchQuery />
                 ))}
               </Layout_TwoColumnCardDisplay>
 

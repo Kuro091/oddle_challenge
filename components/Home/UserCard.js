@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAuthPending, setAuthSearchResult, setLiked } from '../../store/authSlice';
 import { wrapper } from '../../store/store';
 
-export default function UserCard({ user, likedUsers }) {
+export default function UserCard({ user, likedUsers, highlightSearchQuery }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const isLiked = likedUsers?.includes(user.login);
@@ -53,7 +53,11 @@ export default function UserCard({ user, likedUsers }) {
               height: '20px',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-            }}><b>{searchField}</b>{user.login.split(searchField)}</div>
+            }}>
+
+              {highlightSearchQuery ? <><b>{searchField}</b>{user.login.split(searchField)}</> : <>{user.login}</>}
+
+            </div>
             <div style={{ fontSize: '12px', marginTop: '10px' }}>
               <div>
                 {user.followers && (<>{user.followers} followers</>)}
