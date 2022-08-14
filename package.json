@@ -12,13 +12,20 @@
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "axios": "^0.27.2",
+    "lodash": "^4.17.21",
     "next": "12.2.4",
     "next-redux-wrapper": "^7.0.5",
+    "octokit": "^2.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-spinners": "^0.13.4",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "8.21.0",
